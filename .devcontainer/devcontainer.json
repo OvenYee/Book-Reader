@@ -1,7 +1,9 @@
 {
     "name": "Flutter Dev Container",
     "dockerFile": "../Dockerfile",
-    "runArgs": ["--network=host"],
+    "runArgs": [
+        "--network=host"
+    ],
     "customizations": {
         "vscode": {
             "extensions": [
@@ -12,5 +14,9 @@
             ]
         }
     },
-    "postCreateCommand": "flutter doctor"
+    "remoteEnv": {
+        "ANDROID_ADB_SERVER_ADDRESS": "localhost",
+        "ANDROID_ADB_SERVER_PORT": "5037"
+    },
+    "postCreateCommand": "flutter doctor && flutter pub get"
 }

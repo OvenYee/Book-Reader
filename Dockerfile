@@ -5,7 +5,7 @@ ENV FLUTTER_SDK_ROOT=/usr/lib/flutter
 ENV FLUTTER_SDK_VERSION=stable
 
 RUN apt update && \
-    apt install -y curl git unzip xz-utils zip wget openjdk-17-jdk libglu1-mesa clang cmake ninja-build pkg-config libgtk-3-dev mesa-utils && \
+    apt install -y curl git unzip xz-utils zip wget openjdk-17-jdk libglu1-mesa clang cmake ninja-build pkg-config libgtk-3-dev mesa-utils android-tools-adb && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Flutter SDK
@@ -18,7 +18,7 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
     unzip commandlinetools.zip -d ${ANDROID_SDK_ROOT}/cmdline-tools && \
     mv ${ANDROID_SDK_ROOT}/cmdline-tools/cmdline-tools ${ANDROID_SDK_ROOT}/cmdline-tools/latest && \
     rm commandlinetools.zip
-ENV PATH="${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${PATH}"
+ENV PATH="${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${PATH}/platform-tools:${PATH}"
 
 RUN yes | sdkmanager --licenses && \
     sdkmanager "platform-tools" "platforms;android-36" "build-tools;35.0.0"
